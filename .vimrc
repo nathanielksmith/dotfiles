@@ -1,18 +1,15 @@
-set expandtab
 set ts=4
-set sw=4
-set number
-set showmatch
-set ruler
-set incsearch
-"set nowrapscan this was getting really annoying; I'd search towards the bottom and not realize it didn't wrap back up
-set list listchars=tab:>-,trail:.,extends:>
-set cursorline
-
-syntax on
-
-" filename autocompletion
-set wildchar=<Tab>
+set autoindent
+set expandtab
 set wildmode=longest,list
-
-colorscheme torte
+set number
+set incsearch
+set list listchars=tab:>-,trail:.,extends:>
+set t_Co=256
+nnoremap q <Esc>
+noremap <F1> <Esc>
+filetype plugin on
+let g:posero_default_mappings = 1
+colorscheme zenburn
+iab >>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+iab pos_pa POSERO>> let b:posero_push_all = 1
