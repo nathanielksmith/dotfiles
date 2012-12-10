@@ -42,7 +42,7 @@ alias xclip='xclip -selection clipboard'
 alias clip='cat - | xclip -selection clipboard'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gc='gcalcli'
-alias sonnet='/home/nksmith/code/prosaic/cthulhu.coffee /home/nksmith/code/prosaic/templates/sonnet.json'
+alias wicd='wicd-curses'
 
 [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 
