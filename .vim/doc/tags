@@ -1,7 +1,18 @@
+:CoffeeCompile	coffee-script.txt	/*:CoffeeCompile*
+:CoffeeMake	coffee-script.txt	/*:CoffeeMake*
+:CoffeeRun	coffee-script.txt	/*:CoffeeRun*
 :CommandT	command-t.txt	/*:CommandT*
 :CommandTBuffer	command-t.txt	/*:CommandTBuffer*
 :CommandTFlush	command-t.txt	/*:CommandTFlush*
 :CommandTJumps	command-t.txt	/*:CommandTJumps*
+coffee-script	coffee-script.txt	/*coffee-script*
+coffee-script-author	coffee-script.txt	/*coffee-script-author*
+coffee-script-commands	coffee-script.txt	/*coffee-script-commands*
+coffee-script-contents	coffee-script.txt	/*coffee-script-contents*
+coffee-script-introduction	coffee-script.txt	/*coffee-script-introduction*
+coffee-script-license	coffee-script.txt	/*coffee-script-license*
+coffee-script-settings	coffee-script.txt	/*coffee-script-settings*
+coffee-script.txt	coffee-script.txt	/*coffee-script.txt*
 command-t	command-t.txt	/*command-t*
 command-t-authors	command-t.txt	/*command-t-authors*
 command-t-commands	command-t.txt	/*command-t-commands*
@@ -20,6 +31,7 @@ command-t-usage	command-t.txt	/*command-t-usage*
 command-t-website	command-t.txt	/*command-t-website*
 command-t-wildignore	command-t.txt	/*command-t-wildignore*
 command-t.txt	command-t.txt	/*command-t.txt*
+compiler-coffee-script	coffee-script.txt	/*compiler-coffee-script*
 drawit	DrawIt.txt	/*drawit*
 drawit-a	DrawIt.txt	/*drawit-a*
 drawit-b	DrawIt.txt	/*drawit-b*
@@ -47,6 +59,7 @@ drawit-stop	DrawIt.txt	/*drawit-stop*
 drawit-usage	DrawIt.txt	/*drawit-usage*
 drawit-visblock	DrawIt.txt	/*drawit-visblock*
 drawit.txt	DrawIt.txt	/*drawit.txt*
+ft-coffee-script-syntax	coffee-script.txt	/*ft-coffee-script-syntax*
 fugitive	fugitive.txt	/*fugitive*
 fugitive#statusline()	fugitive.txt	/*fugitive#statusline()*
 fugitive-:Gblame	fugitive.txt	/*fugitive-:Gblame*
@@ -110,4 +123,6 @@ g:CommandTScanDotDirectories	command-t.txt	/*g:CommandTScanDotDirectories*
 g:CommandTSelectNextMap	command-t.txt	/*g:CommandTSelectNextMap*
 g:CommandTSelectPrevMap	command-t.txt	/*g:CommandTSelectPrevMap*
 g:CommandTToggleFocusMap	command-t.txt	/*g:CommandTToggleFocusMap*
+g:coffee_compile_vert	coffee-script.txt	/*g:coffee_compile_vert*
+g:coffee_make_options	coffee-script.txt	/*g:coffee_make_options*
 g:drawit_insertmode	DrawIt.txt	/*g:drawit_insertmode*
