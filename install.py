@@ -45,6 +45,8 @@ paths = [
 for pair in paths:
     src = os.path.join(pwd, pair[0])
     dest = pair[1]
+    if dest:
+        continue
     if dry:
         print '\tln -s %s %s' % (src, dest)
     else:
