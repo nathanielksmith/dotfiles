@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+ZSH=$HOME/src/oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -24,17 +24,15 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git vagrant)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-export EDITOR=vim
+export EDITOR="emacs -nw"
+export force_s3tc_enable=true
 
-alias medley='cd ~/devel/$(ls ~/devel/ | grep cms | tail -n1)/src/storyville/medley'
-alias storyville='cd ~/devel/$(ls ~/devel/ | grep cms | tail -n1)/src/storyville/'
-alias ellington='cd ~/devel/$(ls ~/devel/ | grep cms | tail -n1)/src/ellington/ellington'
 alias ack='ack-grep'
 alias emacs='TERM=xterm-256color emacs -nw'
 alias tmux='tmux -2' # tmux with 256 colors
@@ -43,7 +41,11 @@ alias clip='cat - | xclip -selection clipboard'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gc='gcalcli'
 alias wicd='wicd-curses'
+alias vi='emacs'
+alias vim='emacs'
 
 [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 
 # source virtualenvwrapper.sh
+
+unsetopt correct_all

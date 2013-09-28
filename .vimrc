@@ -1,5 +1,5 @@
-execute pathogen#infect()
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"execute pathogen#infect()
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 
 syntax on
