@@ -35,7 +35,7 @@ sleep 2s && \
 tint2 \
 ) &
 
-pytyle3 &
+# pytyle3 &
 
 ## Volume control for systray
 (sleep 2s && pnmixer) &
@@ -48,6 +48,11 @@ xfce4-power-manager &
 
 ## Start Thunar Daemon
 thunar --daemon &
+
+## Set caps -> ctrl
+xmodmap -e 'keycode 66 = Control_L'
+xmodmap -e 'clear Lock'
+xmodmap -e 'add Control = Control_L'
 
 ## Detect and configure touchpad. See 'man synclient' for more info.
 if egrep -iq 'touchpad' /proc/bus/input/devices; then
