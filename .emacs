@@ -1,6 +1,7 @@
 (tool-bar-mode 0)
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ; TODO do i need this?
 (defun turn-on-soft-tabs ()
@@ -35,6 +36,7 @@
     (lambda ()
         (set (make-local-variable 'sgml-basic-offset) 4)))
 
+(setq-default js-indent-level 2)
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (defun show-trailing-ws ()
@@ -73,7 +75,7 @@ Assumes that the frame is only split into two."
     (switch-to-buffer nil))) ; restore the original window in this part of the frame
 
 (require 'package)
-(add-to-list 'package-archives 
+(add-to-list 'package-archives
     '("marmalade" .
       "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
