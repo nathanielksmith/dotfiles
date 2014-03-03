@@ -11,7 +11,8 @@
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 ; initial start won't work without this (package-refresh-contents)
-(defvar my-packages '(cider
+(defvar my-packages '(ac-nrepl
+		      cider
 		      clojure-mode
 		      clojure-test-mode
 		      evil
@@ -19,7 +20,9 @@
 		      projectile
 		      coffee-mode
 		      flx-ido
+		      ido-ubiquitous
 		      helm
+		      helm-projectile
 		      evil-tabs
 		      flycheck
 		      magit
@@ -37,18 +40,24 @@
 (require 'cider)
 (require 'zenburn-theme)
 (require 'flx-ido)
+(require 'ido-ubiquitous)
 (require 'whitespace)
 (require 'coffee-mode)
 (require 'clojure-mode)
 (require 'projectile)
 (require 'helm)
+(require 'helm-projectile)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; OPTIONS
 ;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq ido-use-faces nil) ;; to see flx highlights
 (setq org-agenda-files (list "~/org/agenda.org"))
 
 (setq inhibit-startup-message t)
+(setq scroll-margin 0 ;; can't really tell a difference with this
+      scroll-conservatively 100000
+      scroll-preserve-screen-position 1)
 
 ; don't let next-line add new lines at end of file
 (setq-default next-line-add-newlines nil)
@@ -74,8 +83,14 @@
 (whitespace-mode)
 (ido-mode)
 (flx-ido-mode)
+(ido-ubiquitous-mode +1)
 (evil-mode)
 (tool-bar-mode 0)
+(line-number-mode t)
+(column-number-mode t)
+(size-indication-mode t)
+(if (fboundp 'fringe-mode)
+    (fringe-mode 4))
 
 (add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
@@ -92,9 +107,6 @@
      nil 'fullscreen
      (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
 
-(defun show-trailing-ws ()
-  (setq show-trailing-whitespace t))
-
 (defun toggle-frame-split ()
   "If the frame is split vertically, split it horizontally or vice versa.
 Assumes that the frame is only split into two."
@@ -107,19 +119,16 @@ Assumes that the frame is only split into two."
       (split-window-vertically)) ; gives us a split with the other window twice
     (switch-to-buffer nil))) ; restore the original window in this part of the frame
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HOOKS
 ;;;;;;;;;;;;;;;;;;;;;;;;
-(add-hook 'text-mode-hook 'turn-on-auto-fill) ;; what does this do?
-(add-hook 'before-save-hook 'whitespace-cleanup)
-(add-hook 'text-mode-hook 'show-trailing-ws)
+(add-hook 'before-save-hook 'delete-trailing-whitespace) ; won't mess with indentation
+(add-hook 'text-mode-hook 'turn-on-auto-fill) ;; break long lines. TODO consider specific modes.
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook 'projectile-mode)
+(add-hook 'prog-mode-hook 'auto-complete-mode)
 (add-hook 'html-mode-hook
-    (lambda ()
-	(set (make-local-variable 'sgml-basic-offset) 4)))
-
+    (lambda () (set (make-local-variable 'sgml-basic-offset) 4)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEYS
@@ -136,6 +145,7 @@ Assumes that the frame is only split into two."
 (global-set-key (kbd "C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-<down>") 'shrink-window)
 (global-set-key (kbd "C-<up>") 'enlarge-window)
+(global-set-key (kbd "C-x 4") 'toggle-frame-split)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-c C-f") 'helm-recentf)
@@ -158,8 +168,7 @@ Assumes that the frame is only split into two."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(gnus-nntp-server "news.gmane.org")
- '(tool-bar-mode nil))
+ '(gnus-nntp-server "news.gmane.org"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
