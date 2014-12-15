@@ -119,6 +119,15 @@ Assumes that the frame is only split into two."
       (split-window-vertically)) ; gives us a split with the other window twice
     (switch-to-buffer nil))) ; restore the original window in this part of the frame
 
+(defun helm-clojure-headlines ()
+  "Display headlines for the current Clojure file."
+  (interactive)
+  (helm-mode t)
+  (jit-lock-fontify-now) ;; https://groups.google.com/forum/#!topic/emacs-helm/YwqsyRRHjY4
+  (helm :sources '(((name . "Clojure Headlines")
+                    (volatile)
+                    (headline "^(\\|testing\\|^;.*[A-Za-z]+")))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HOOKS
 ;;;;;;;;;;;;;;;;;;;;;;;;
