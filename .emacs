@@ -146,6 +146,8 @@ Assumes that the frame is only split into two."
 
 (define-key evil-normal-state-map [escape] 'keyboard-quit)
 
+(global-unset-key (kbd "C-x h"))
+(global-set-key (kbd "C-x h") 'helm-clojure-headlines)
 (global-set-key (kbd "C-<tab>") 'next-multiframe-window)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'previous-multiframe-window)
 (global-set-key (kbd "C-x S-o") 'previous-multiframe-window) ;; for terminal, since C-tab breaks there
