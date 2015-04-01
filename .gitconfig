@@ -1,5 +1,7 @@
 [user]
-	name = nathaniel smith
-	email = nathanielksmith@gmail.com
+    name = nathaniel smith
+    email = nathanielksmith@gmail.com
 [color]
-	ui = true
+    ui = true
+[aliases]
+    cl = "! f() { git clone git@github.com:$1/$2.git ;}; f"
