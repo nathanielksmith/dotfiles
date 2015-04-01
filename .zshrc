@@ -30,7 +30,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-export EDITOR="emacs -nw"
+export EDITOR="vim"
 export force_s3tc_enable=true
 
 alias ack='ack-grep'
@@ -40,9 +40,6 @@ alias xclip='xclip -selection clipboard'
 alias clip='cat - | xclip -selection clipboard'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gc='gcalcli'
-alias wicd='wicd-curses'
-alias vi='emacs'
-alias vim='emacs'
 
 [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
 
