@@ -1,7 +1,3 @@
-"execute pathogen#infect()
-"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
-
 syntax on
 
 set ts=4
@@ -17,7 +13,7 @@ set cursorcolumn
 set laststatus=2
 
 filetype plugin on
-colorscheme zenburn
+colorscheme elflord
 
 nnoremap q <Esc>
 noremap <F1> <Esc>
@@ -26,9 +22,3 @@ nmap j gj
 nmap k gk
 " C-e to go b#
 nmap <C-e> :e#<CR>
-
-let g:posero_default_mappings = 1
-iab >>>>> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-iab pos_pa POSERO>> let b:posero_push_all = 1
-
-au BufWritePost *.coffee silent CoffeeMake! | cwindow | redraw!
