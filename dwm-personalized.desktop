@@ -1,7 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=dwm-personalized
-Comment=Dynamic Window Manager
-Exec=dwm-personalized
-Icon=dwm
-Type=XSession
