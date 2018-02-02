@@ -31,7 +31,7 @@ unblockblu () {
 }
 
 tea () {
-  $(sleep $1m && echo "your tea steeped for $1 minutes" | write vilmibm 2&>/dev/null)
+  sleep $1m && echo "your tea steeped for $1 minutes" | write $(whoami) 2&>/dev/null
 }
 
 pygrep () {
