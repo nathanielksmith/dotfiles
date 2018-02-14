@@ -1,5 +1,5 @@
 export EDITOR=vim
-export PATH=/home/vilmibm/bin:/home/vilmibm/.gem/ruby/2.4.0/bin:$PATH
+export PATH=/home/vilmibm/bin:/home/vilmibm/.gem/ruby/2.4.0/bin:/home/vilmibm/.gem/ruby/2.5.0/bin:$PATH
 export VENVDIR=/home/vilmibm/.virtualenvs
 
 mesg y
