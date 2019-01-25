@@ -7,7 +7,7 @@
 
 " Environment overrides
 
-"let $FZF_DEFAULT_COMMAND = 'fd --type f'
+let $FZF_DEFAULT_COMMAND = 'ag -l --ignore vendor -g ""'
 
 " Plugin setup
 
@@ -22,12 +22,12 @@ call plug#begin('~/.vim/plug')
 set rtp+=~/src/fzf
 Plug '~/src/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'flazz/vim-colorschemes'
 
 call plug#end()
 
 " Settings
 
-let g:Grep_Default_Options="--exclude-dir=vendor"
 syntax on
 filetype plugin indent on
 
@@ -94,7 +94,7 @@ noremap <F1> <Esc>
 nmap j gj
 nmap k gk
 
-nmap <Leader>f :GFiles<Return>
+nmap <Leader>f :Files<Return>
 nmap <Leader><Tab> :b#<Return>
 nmap <Leader>/ :Ag<Return>
 nmap <Leader>b :Buffers<Return>
