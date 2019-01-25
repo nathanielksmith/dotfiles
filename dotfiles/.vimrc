@@ -2,11 +2,28 @@
 " - FZF
 " - Fugitive
 " - vim-orgmode
-" as well as the fd command.
+" - vim-plug
+" - the fd command
 
 " Environment overrides
 
-let $FZF_DEFAULT_COMMAND = 'fd --type f'
+#let $FZF_DEFAULT_COMMAND = 'fd --type f'
+
+" Plugin setup
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plug')
+
+set rtp+=~/src/fzf
+Plug '~/src/fzf'
+Plug 'junegunn/fzf.vim'
+
+call plug#end()
 
 " Settings
 
@@ -77,8 +94,9 @@ noremap <F1> <Esc>
 nmap j gj
 nmap k gk
 
-nmap <Leader>f :FZF<Return>
+nmap <Leader>f :GFiles<Return>
 nmap <Leader><Tab> :b#<Return>
-nmap <Leader>b :ls<Return>
+nmap <Leader>/ :Ag<Return>
+nmap <Leader>b :Buffers<Return>
 nmap <Leader>s :w<Return>
 nmap <Leader>w <C-w>
