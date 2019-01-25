@@ -7,7 +7,7 @@
 
 " Environment overrides
 
-#let $FZF_DEFAULT_COMMAND = 'fd --type f'
+"let $FZF_DEFAULT_COMMAND = 'fd --type f'
 
 " Plugin setup
 
