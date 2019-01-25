@@ -7,7 +7,7 @@
 
 " Environment overrides
 
-let $FZF_DEFAULT_COMMAND = 'ag -l --ignore vendor -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag -l --ignore vendor --ignore __pycache__ -g ""'
 
 " Plugin setup
 
