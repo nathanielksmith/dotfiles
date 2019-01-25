@@ -18,10 +18,6 @@ colors () {
   done
 }
 
-pygrep () {
-  find . -name "*.py" | xargs grep $1
-}
-
 gack () {
   ack --ignore-dir=vendor --ignore-dir=tmp --ignore-dir=log $@
 }

@@ -8,16 +8,15 @@
 
 let $FZF_DEFAULT_COMMAND = 'fd --type f'
 
-
 " Settings
 
 let g:Grep_Default_Options="--exclude-dir=vendor"
-colorscheme herald
 syntax on
 filetype plugin indent on
 
 set shiftwidth=2
 set tabstop=2
+set textwidth=100
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildemush/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildetown/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/github/* setlocal ts=2 sw=2
@@ -31,6 +30,9 @@ set number
 set incsearch
 "set list listchars=tab:>-,trail:.,extends:>
 set t_Co=256
+set background=dark
+colorscheme herald
+
 " set cursorline
 " set cursorcolumn
 
