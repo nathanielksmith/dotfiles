@@ -12,30 +12,44 @@ mkvenv () {
   python3 -mvenv $VENVDIR/$1
 }
 
-sln () {
-  ln -s `pwd`/$1 $2
-}
-
-alias be="bundle exec"
-
 colors () {
   for i in {0..255} ; do
     printf "\x1b[38;5;${i}mcolour${i}\n"
   done
 }
 
-blublock () {
-  redshift -O 3700
-}
-
-unblockblu () {
-  redshift -O 6500
-}
-
-tea () {
-  sleep $1m && echo "your tea steeped for $1 minutes" | write $(whoami) 2&>/dev/null
-}
-
 pygrep () {
   find . -name "*.py" | xargs grep $1
 }
+
+gack () {
+  ack --ignore-dir=vendor --ignore-dir=tmp --ignore-dir=log $@
+}
+
+f () {
+  find . -name "*$1*" -type f -not -path '*/\.*'
+}
+
+ff () {
+  IFS="*"
+  arg="*$**"
+  echo $arg
+  find . -name "$arg" -type f -not -path '*/\.*'
+}
+
+mirror () {
+  wget --mirror --convert-links --adjust-extension --page-requisites --no-parent $1
+}
+
+# only execute on work machine
+if [ -f ~/.ssh/work ]; then
+  if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+      ssh-agent > ~/.ssh-agent-env
+      ssh-add ~/.ssh/work
+      ssh-add ~/.ssh/id_rsa
+  fi
+  if [[ "$SSH_AGENT_PID" == "" ]]; then
+      eval "$(<~/.ssh-agent-env)"
+  fi
+fi
+

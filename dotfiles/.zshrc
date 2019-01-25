@@ -94,3 +94,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source ~/src/dot/env.sh
+bindkey \^U backward-kill-line
+
+PATH="/home/vilmibm/perl5/bin${PATH:+:${PATH}}"; export PATH;
