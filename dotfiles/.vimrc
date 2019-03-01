@@ -7,7 +7,7 @@
 
 " Environment overrides
 
-let $FZF_DEFAULT_COMMAND = 'ag -l --ignore vendor --ignore __pycache__ -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag -l --ignore=vendor --ignore=__pycache__ -g ""'
 
 " Plugin setup
 
@@ -23,6 +23,8 @@ set rtp+=~/src/fzf
 Plug '~/src/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'vimwiki/vimwiki'
+Plug '~/src/vim-hy'
 
 call plug#end()
 
@@ -100,3 +102,6 @@ nmap <Leader>/ :Ag<Return>
 nmap <Leader>b :Buffers<Return>
 nmap <Leader>s :w<Return>
 nmap <Leader>w <C-w>
+nmap <Leader>wm <C-w>o
+nmap <Leader>. :source%<Return>
+nmap <Leader>ed :e~/.vimrc<Return>
