@@ -24,7 +24,7 @@ Plug '~/src/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'vimwiki/vimwiki'
-Plug '~/src/vim-hy'
+Plug 'hylang/vim-hy'
 
 call plug#end()
 
