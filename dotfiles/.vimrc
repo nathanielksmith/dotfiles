@@ -50,7 +50,7 @@ set incsearch
 "set list listchars=tab:>-,trail:.,extends:>
 set t_Co=256
 set background=dark
-colorscheme herald
+colorscheme 256_noir
 
 " set cursorline
 " set cursorcolumn
@@ -68,6 +68,8 @@ function! StatuslineGit()
   let l:branchname = GitBranch()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
+
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
 
 set laststatus=2 " always show statusline
 set statusline=
