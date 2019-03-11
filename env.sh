@@ -4,6 +4,8 @@ export VENVDIR=/home/vilmibm/.virtualenvs
 
 mesg y
 
+alias sgg="cd ~/src/github/github"
+
 venv () {
   source $VENVDIR/$1/bin/activate
 }

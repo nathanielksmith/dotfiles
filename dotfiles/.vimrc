@@ -24,7 +24,7 @@ Plug '~/src/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'vimwiki/vimwiki'
-Plug 'hylang/vim-hy'
+Plug '~/src/vim-hy'
 
 call plug#end()
 
@@ -36,6 +36,7 @@ filetype plugin indent on
 set shiftwidth=2
 set tabstop=2
 set textwidth=100
+set relativenumber
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildemush/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildetown/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/github/* setlocal ts=2 sw=2
@@ -50,7 +51,8 @@ set incsearch
 "set list listchars=tab:>-,trail:.,extends:>
 set t_Co=256
 set background=dark
-colorscheme 256_noir
+"colorscheme 256_noir
+colorscheme Atelier_CaveDark
 
 " set cursorline
 " set cursorcolumn
