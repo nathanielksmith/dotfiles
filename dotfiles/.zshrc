@@ -96,4 +96,6 @@ source $ZSH/oh-my-zsh.sh
 source ~/src/dot/env.sh
 bindkey \^U backward-kill-line
 
-PATH="/home/vilmibm/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PATH="/home/vilmibm/perl5/bin${PATH:+:${PATH}}"
+PATH="/home/vilmibm/.gem/ruby/2.6.0/bin:${PATH}"
+export PATH
