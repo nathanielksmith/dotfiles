@@ -54,6 +54,8 @@ set background=dark
 "colorscheme 256_noir
 colorscheme Atelier_CaveDark
 
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+
 " set cursorline
 " set cursorcolumn
 
