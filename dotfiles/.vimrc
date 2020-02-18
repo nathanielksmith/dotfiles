@@ -61,6 +61,8 @@ set t_Co=256
 "colorscheme ancient
 colorscheme Atelier_CaveDark
 
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+
 " set cursorline
 " set cursorcolumn
 

@@ -40,6 +40,12 @@ mirror () {
   wget --mirror --convert-links --adjust-extension --page-requisites --no-parent $1
 }
 
+paste () {
+  filename="`pwgen | head -n1`.txt"
+  cat - > "/home/vilmibm/public_html/paste/$filename"
+  echo "https://tilde.town/~vilmibm/paste/$filename"
+}
+
 # only execute on non-mac work machine
 if [ "$(uname)" != "Darwin" ]; then
   if [ -f ~/.ssh/work ]; then
