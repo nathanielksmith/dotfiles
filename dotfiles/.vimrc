@@ -1,9 +1,6 @@
 " This file assumes installation of:
-" - FZF
-" - Fugitive
-" - vim-orgmode
-" - vim-plug
-" - the fd command
+" - FZF -- specifically, a clone of junegunn/fzf at ~/src/fzf as well as the fzf binary
+" - ag -- silversearch-ag package on debian
 
 " Environment overrides
 
