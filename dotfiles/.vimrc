@@ -115,9 +115,11 @@ nmap <Leader>w <C-w>
 nmap <Leader>wm <C-w>o
 nmap <Leader>. :source%<Return>
 nmap <Leader>ed :e~/.vimrc<Return>
+nmap <Leader>gr :!go run %<Return>
 
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
+iab dbg fmt.Printf("%#v\n",
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
