@@ -124,7 +124,8 @@ nmap <Leader>gi :GoImports<Return>
 
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
-iab dbg fmt.Printf("%#v\n",
+iab dbg fmt.Printf("DEBUG %#v\n",
+iab ae assert.Equal
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
