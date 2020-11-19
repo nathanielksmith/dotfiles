@@ -25,6 +25,7 @@ Plug 'tpope/vim-fugitive'
 "Plug 'kchmck/vim-coffee-script'
 "Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'arcticicestudio/nord-vim'
 "Plug '~/src/vim-hy'
 
 call plug#end()
@@ -56,7 +57,9 @@ set t_Co=256
 "colorscheme 256_noir
 "set background=light
 "colorscheme ancient
-colorscheme Atelier_CaveDark
+"colorscheme Atelier_CaveDark
+"colorscheme sourcerer
+colorscheme nord
 
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 
@@ -124,7 +127,7 @@ nmap <Leader>gi :GoImports<Return>
 
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
-iab dbg fmt.Printf("DEBUG %#v\n",
+iab dbg fmt.Printf("DBG %#v\n",
 iab ae assert.Equal
 
 nnoremap <leader>d "_d
