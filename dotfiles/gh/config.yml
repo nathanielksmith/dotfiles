@@ -1,0 +1,26 @@
+aliases:
+    co: pr checkout
+    heart: api -H Accept:application/vnd.github.squirrel-girl-preview+json -XPOST repos/:owner/:repo/issues/$1/reactions --raw-field content=heart
+    il: issue list
+    iv: issue view
+    igrep: '!gh issue list -l$1 | grep $2'
+    checklist: '!gh issue list -l$1 | sed "s/^/- [ ] /" > checklist.md'
+    clone: repo clone
+    approve: pr review -a
+    top: '!ghd api graphql --paginate -F"owner=:owner" -F"name=:repo" -F=query=''query($endCursor:String, $name:String!, $owner:String!) { repository(owner: $owner, name:$name) { issues(first:100, after: $endCursor, states:OPEN) { pageInfo { hasNextPage endCursor } edges { node { title number state reactions(first:100){ totalCount }}}}}}'' | jq -r ".data.repository.issues.edges|map(.node)|map(select(.reactions.totalCount > 0))|sort_by(.reactions.totalCount)|reverse|map(\"\(.title)\t#\(.number)\t\(.state)\t\(.reactions.totalCount)\")|.[]"'
+    next-slide: '!clear; gh gist view a97cadf9722855a36d7e6458ab1e93db -f "slide`cat /tmp/ix`.md"; perl -e "print ((`cat /tmp/ix` + 1) % 5)" > /tmp/ix'
+    reset-slide: '!echo 0 > /tmp/ix'
+    prev-slide: '!clear; perl -e "print ((`cat /tmp/ix` - 1) % 5)" > /tmp/ix; gh gist view a97cadf9722855a36d7e6458ab1e93db -f "slide`cat /tmp/ix`.md"'
+    immigrant-justice: gist view eb5f40f9ec892f22064804af90065726
+    edit-slides: gist edit a97cadf9722855a36d7e6458ab1e93db
+    cowments: '!gh api "repos/:owner/:repo/issues/$1/comments" | jq "map(.body)[]" | while read c; do cowsay $c; done'
+    comments: '!gh api "repos/:owner/:repo/issues/$1/comments" | jq -r ''map("\(.user.login):\n\(.body)\n\n")[]'''
+    repo-delete: api -X DELETE "repos/vilmibm/deleteme"
+    note: 'api "projects/columns/$1/cards" -fnote="$2"'
+    triage: '!ghd api graphql --paginate -Fquery=''query($endCursor:String){repository(owner:"cli",name:"cli"){issues(first:100,states:OPEN,after:$endCursor){pageInfo{hasNextPage endCursor}edges{node{number title labels(first:10){totalCount edges{node{name}}}}}}}}'' | jq -r ''.data.repository.issues.edges|map(.node)|map(select(any(.labels.edges[]; .node.name | test("p1|p2|p3|core|docs|help wanted|tracking issue|needs-design|blocked|needs-user-input")) | not))|map("\(.number)\t\(.title)")|.[]'''
+    label: '!jq -n "{\"labels\":[\"$2\"]}" | ghd api "repos/:owner/:repo/issues/$1/labels" --input -'
+    ibody: '!gh issue view $1 | tail -n+10'
+    reset: '!git checkout trunk && git fetch origin trunk && git reset --hard origin/trunk'
+    isearch: '!gh issue list -L300 | ag $1 | cut -f1,3'
+git_protocol: ssh
+prompt: enabled
