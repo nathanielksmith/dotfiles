@@ -22,6 +22,6 @@ aliases:
     ibody: '!gh issue view $1 | tail -n+10'
     reset: '!git checkout trunk && git fetch origin trunk && git reset --hard origin/trunk'
     isearch: '!gh issue list -L300 | ag $1 | cut -f1,3'
-    view: '!gh pr view  || gh issue view '
+    view: '!gh pr view $1 || gh issue view $1'
 git_protocol: ssh
 prompt: enabled
