@@ -62,13 +62,10 @@ set incsearch
 "set list listchars=tab:>-,trail:.,extends:>
 set t_Co=256
 set background=dark
-set termguicolors
 colorscheme nord
 
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
-
-" set cursorline
-" set cursorcolumn
+ set cursorline
+ set cursorcolumn
 
 " STATUSLINE
 
@@ -132,8 +129,9 @@ nmap <Leader>gi :GoImports<Return>
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
 iab dbg fmt.Printf("DBG %#v\n",
+iab ref return fmt.Errorf("
 iab ae assert.Equal
-iab tests tests := []struct {<CR>name string<CR>}{}<CR><CR>for _, tt := range tests {<CR>t.Run(tt.name, func(t *testing.T) {<CR>})<CR>}
+iab tss tests := []struct {<CR>name string<CR>}{}<CR><CR>for _, tt := range tests {<CR>t.Run(tt.name, func(t *testing.T) {<CR>})<CR>}
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
