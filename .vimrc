@@ -58,7 +58,6 @@ set expandtab
 set wildmode=longest,list
 set number
 set incsearch
-"colorscheme Atelier_CaveDark
 "set list listchars=tab:>-,trail:.,extends:>
 set t_Co=256
 set background=dark
