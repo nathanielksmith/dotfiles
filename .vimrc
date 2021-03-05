@@ -124,6 +124,8 @@ nmap <Leader>gr :!go run %<Return>
 nmap <Leader>gt :GoTest<Return>
 nmap <Leader>gd :GoDef<Return>
 nmap <Leader>gi :GoImports<Return>
+nmap <Leader>gb :wa<Return>:GoBuild<Return>
+nmap <Leader>gR :wa<Return>:GoBuild<Return>:GoRename<Return>
 
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
