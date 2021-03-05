@@ -20,6 +20,7 @@ set rtp+=~/src/fzf
 Plug '~/src/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'flazz/vim-colorschemes'
+Plug 'arcticicestudio/nord-vim'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fugitive'
 "Plug 'kchmck/vim-coffee-script'
@@ -35,9 +36,15 @@ call plug#end()
 syntax on
 filetype plugin indent on
 
+" use soft wrapping
+" https://vim.fandom.com/wiki/Word_wrap_without_line_breaks
+set textwidth=0
+set wrapmargin=0
+set wrap
+set linebreak
+
 set shiftwidth=2
 set tabstop=2
-set textwidth=100
 set relativenumber
 set backspace=indent,eol,start
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildemush/* setlocal ts=4 sw=4
@@ -51,20 +58,14 @@ set expandtab
 set wildmode=longest,list
 set number
 set incsearch
+"colorscheme Atelier_CaveDark
 "set list listchars=tab:>-,trail:.,extends:>
 set t_Co=256
-"set background=dark
-"colorscheme 256_noir
-"set background=light
-"colorscheme ancient
-"colorscheme Atelier_CaveDark
-"colorscheme sourcerer
+set background=dark
 colorscheme nord
 
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
-
-" set cursorline
-" set cursorcolumn
+ set cursorline
+ set cursorcolumn
 
 " STATUSLINE
 
@@ -130,7 +131,9 @@ nmap <Leader>gR :wa<Return>:GoBuild<Return>:GoRename<Return>
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
 iab dbg fmt.Printf("DBG %#v\n",
+iab ref return fmt.Errorf("
 iab ae assert.Equal
+iab tss tests := []struct {<CR>name string<CR>}{}<CR><CR>for _, tt := range tests {<CR>t.Run(tt.name, func(t *testing.T) {<CR>})<CR>}
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
