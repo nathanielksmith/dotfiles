@@ -15,13 +15,24 @@ aliases:
     edit-slides: gist edit a97cadf9722855a36d7e6458ab1e93db
     cowments: '!gh api "repos/:owner/:repo/issues/$1/comments" | jq "map(.body)[]" | while read c; do cowsay $c; done'
     comments: '!gh api "repos/:owner/:repo/issues/$1/comments" | jq -r ''map("\(.user.login):\n\(.body)\n\n")[]'''
-    repo-delete: api -X DELETE "repos/vilmibm/deleteme"
+    repo-delete: api -X DELETE "repos/$1"
     note: 'api "projects/columns/$1/cards" -fnote="$2"'
     triage: '!ghd api graphql --paginate -Fquery=''query($endCursor:String){repository(owner:"cli",name:"cli"){issues(first:100,states:OPEN,after:$endCursor){pageInfo{hasNextPage endCursor}edges{node{number title labels(first:10){totalCount edges{node{name}}}}}}}}'' | jq -r ''.data.repository.issues.edges|map(.node)|map(select(any(.labels.edges[]; .node.name | test("p1|p2|p3|core|docs|help wanted|tracking issue|needs-design|blocked|needs-user-input")) | not))|map("\(.number)\t\(.title)")|.[]'''
     label: '!jq -n "{\"labels\":[\"$2\"]}" | ghd api "repos/:owner/:repo/issues/$1/labels" --input -'
     ibody: '!gh issue view $1 | tail -n+10'
-    reset: '!git checkout trunk && git fetch origin trunk && git reset --hard origin/trunk'
+    reset: '!git stash && git switch trunk && git fetch origin trunk && git reset --hard origin/trunk'
     isearch: '!gh issue list -L300 | ag $1 | cut -f1,3'
     view: '!gh pr view $1 || gh issue view $1'
+    cur-branch: '!git rev-parse --abbrev-ref HEAD'
+    test-workflow: '!git commit -mWIP .github/workflows/$1 && git push && ghd workflow run --ref $(gh cur-branch) $@'
+    banner: '!toilet -fivrit gh actions; echo; gh actions'
+    workflow-test: '!git commit -mWIP .github/workflows/$1 && git push && gh workflow run --ref $(gh cur-branch) $@'
+    ie: issue edit
+    foobar: |
+        !echo "hi"
+    e: echo
+    p: pr
+    pv: pr view
 git_protocol: ssh
 prompt: enabled
+http_unix_socket: ""
