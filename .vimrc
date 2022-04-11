@@ -16,6 +16,9 @@ endif
 
 call plug#begin('~/.vim/plug')
 
+" increase timeout for YCM
+let g:plug_timeout = 300
+
 set rtp+=~/src/fzf
 Plug '~/src/fzf'
 Plug 'junegunn/fzf.vim'
@@ -27,6 +30,7 @@ Plug 'tpope/vim-fugitive'
 "Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'arcticicestudio/nord-vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
 "Plug '~/src/vim-hy'
 
 call plug#end()
