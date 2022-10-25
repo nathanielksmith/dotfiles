@@ -26,8 +26,6 @@ Plug 'flazz/vim-colorschemes'
 Plug 'arcticicestudio/nord-vim'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fugitive'
-"Plug 'kchmck/vim-coffee-script'
-"Plug 'leafgarland/typescript-vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
@@ -49,7 +47,6 @@ set linebreak
 
 set shiftwidth=2
 set tabstop=2
-set relativenumber
 set backspace=indent,eol,start
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildemush/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildetown/* setlocal ts=4 sw=4
@@ -61,14 +58,20 @@ set autoindent
 set expandtab
 set wildmode=longest,list
 set number
+"set relativenumber
 set incsearch
 "set list listchars=tab:>-,trail:.,extends:>
 set t_Co=256
-set background=dark
-colorscheme nordisk
+"colorscheme Atelier_EstuaryDark
+"colorscheme SerialExperimentsLain
+"colorscheme monochrome
+"color off
+set background=light
+colorscheme minimal
 
- set cursorline
- set cursorcolumn
+
+" set cursorline
+" set cursorcolumn
 
 " STATUSLINE
 
