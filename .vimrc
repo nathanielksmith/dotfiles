@@ -64,14 +64,30 @@ set incsearch
 set t_Co=256
 "colorscheme Atelier_EstuaryDark
 "colorscheme SerialExperimentsLain
-"colorscheme monochrome
 "color off
-set background=light
-colorscheme minimal
+"colorscheme minimal
+"colorscheme monochrome
+colorscheme true-monochrome
+set background=dark
 
+" Enable markdown folding
+let g:markdown_folding = 1
 
-" set cursorline
-" set cursorcolumn
+" Disable parentheses matching depends on system. This way we should address all cases (?)
+set noshowmatch
+
+" NoMatchParen " This doesnt work as it belongs to a plugin, which is only loaded _after_ all files are.
+" Trying disable MatchParen after loading all plugins
+function! g:NoMoreMatchParen ()
+    if exists(":NoMatchParen")
+        :NoMatchParen
+    endif
+endfunction
+
+augroup plugin_initialize
+    autocmd!
+    autocmd VimEnter * call NoMoreMatchParen()
+augroup END
 
 " STATUSLINE
 
@@ -125,6 +141,8 @@ nmap <Leader>w <C-w>
 nmap <Leader>wm <C-w>o
 nmap <Leader>. :source%<Return>
 nmap <Leader>ed :e~/.vimrc<Return>
+
+vnoremap <C-r> :terminal bash<CR>
 
 " Go stuff
 nmap <Leader>gr :!go run %<Return>
