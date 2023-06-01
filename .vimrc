@@ -61,11 +61,25 @@ set number
 "set relativenumber
 set incsearch
 "set list listchars=tab:>-,trail:.,extends:>
-"colorscheme minimal
 
+" Enable markdown folding
+let g:markdown_folding = 1
 
-" set cursorline
-" set cursorcolumn
+" Disable parentheses matching depends on system. This way we should address all cases (?)
+set noshowmatch
+
+" NoMatchParen " This doesnt work as it belongs to a plugin, which is only loaded _after_ all files are.
+" Trying disable MatchParen after loading all plugins
+function! g:NoMoreMatchParen ()
+    if exists(":NoMatchParen")
+        :NoMatchParen
+    endif
+endfunction
+
+augroup plugin_initialize
+    autocmd!
+    autocmd VimEnter * call NoMoreMatchParen()
+augroup END
 
 " STATUSLINE
 
@@ -121,6 +135,8 @@ nmap <Leader>. :source%<Return>
 nmap <Leader>ed :e~/.vimrc<Return>
 imap <C-w>n <ESC>:tabn<Return>
 imap <C-w>p :tabp<cr>
+
+vnoremap <C-r> :terminal bash<CR>
 
 " Go stuff
 nmap <Leader>gr :!go run %<Return>
@@ -195,4 +211,7 @@ let &t_ut=''
 set t_Co=256
 set background=dark
 
+"colorscheme minimal 
+"colorscheme monochrome
+"colorscheme true-monochrome
 colorscheme arcadia
