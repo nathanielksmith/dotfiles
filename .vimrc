@@ -119,6 +119,8 @@ nmap <Leader>w <C-w>
 nmap <Leader>wm <C-w>o
 nmap <Leader>. :source%<Return>
 nmap <Leader>ed :e~/.vimrc<Return>
+imap <C-w>n <ESC>:tabn<Return>
+imap <C-w>p :tabp<cr>
 
 " Go stuff
 nmap <Leader>gr :!go run %<Return>
