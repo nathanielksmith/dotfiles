@@ -51,6 +51,8 @@ set backspace=indent,eol,start
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildemush/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildetown/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/github/* setlocal ts=2 sw=2
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
+autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
 set gfn=Fantasque\ Sans\ Mono\ 12
 
 set shiftround
