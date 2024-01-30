@@ -5,6 +5,8 @@
 " Environment overrides
 
 let $FZF_DEFAULT_COMMAND = 'ag -l --ignore=vendor --ignore=__pycache__ -g ""'
+"this failed idk why
+"let $FZF_DEFAULT_COMMAND = 'rg -l --ignore ~/src/dotfiles/rg.ignore -g ""'
 
 " Plugin setup
 
