@@ -29,6 +29,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
+Plug 'godlygeek/tabular'
+" this thing made lists go wacky:
+"Plug 'preservim/vim-markdown'
 "Plug '~/src/vim-hy'
 
 call plug#end()
@@ -135,10 +138,12 @@ nmap <Leader>w <C-w>
 nmap <Leader>wm <C-w>o
 nmap <Leader>. :source%<Return>
 nmap <Leader>ed :e~/.vimrc<Return>
+
 imap <C-w>n <ESC>:tabn<Return>
 imap <C-w>p :tabp<cr>
 
 vnoremap <C-r> :terminal bash<CR>
+vnoremap <Leader>sg y:spellgood <C-R>"<ENTER>
 
 " Go stuff
 nmap <Leader>gr :!go run %<Return>
@@ -147,6 +152,8 @@ nmap <Leader>gd :GoDef<Return>
 nmap <Leader>gi :GoImports<Return>
 nmap <Leader>gb :wa<Return>:GoBuild<Return>
 nmap <Leader>gR :wa<Return>:GoBuild<Return>:GoRename<Return>
+
+nmap <Leader>gg :YcmCompleter GoToDefinition<Return>
 
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
@@ -161,6 +168,10 @@ xnoremap <leader>p "_dP
 
 nmap <C-g> :GoDecls<cr>
 imap <C-g> <esc>:<C-u>GoDecls<cr>
+
+" this works but not when editing markdown :(
+imap <C-i> <esc>>>$i
+imap <C-u> <esc><<$i
 
 " wheee
 
