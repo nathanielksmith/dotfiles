@@ -1,9 +1,35 @@
+use std::fmt;
 use std::process::Command;
 use std::{error::Error, thread, time::Duration};
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 
 use signal_hook::{consts::SIGINT, consts::SIGHUP, iterator::Signals};
+
+#[derive(Debug)]
+struct WeirdOutputError {
+    details: String
+}
+
+impl WeirdOutputError {
+    fn new(msg: &str) -> WeirdOutputError {
+        WeirdOutputError{details: msg.to_string()}
+    }
+}
+
+impl fmt::Display for WeirdOutputError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}", self.details)
+    }
+
+}
+
+impl Error for WeirdOutputError {
+    fn description(&self) -> &str {
+        &self.details
+    }
+}
+
 
 fn power() -> Result<String, Box<dyn Error>> {
     let upower = Command::new("upower").arg("-i").arg("/org/freedesktop/UPower/devices/battery_BAT1").output()?;
@@ -27,7 +53,25 @@ fn power() -> Result<String, Box<dyn Error>> {
             continue;
         }
     }
-    Ok(format!("BATT {} {}", percentage.trim(), state.trim()))
+    if percentage == "" {
+        return Err(Box::new(WeirdOutputError::new("weird upower output")));
+    }
+    Ok(format!("BATT {} {}", percentage.trim(), state))
+}
+
+fn volume() -> Result<String, Box<dyn Error>> {
+    let wpctl = Command::new("wpctl").arg("get-volume").arg("@DEFAULT_AUDIO_SINK@").output()?;
+    let s = String::from_utf8(wpctl.stdout)?;
+    if !s.contains("Volume: ") {
+        return Err(Box::new(WeirdOutputError::new("weird wpctl output")));
+    }
+    let level = String::from(s.split(" ").nth(1).unwrap());
+    let mut muted = String::from("");
+    if s.contains("MUTED") {
+        muted = String::from("[M]");
+    }
+
+    Ok(format!("VOL {}{}", level.trim(), muted))
 }
 
 // status_command while date +'%Y-%m-%d %H:%M '; do sleep 5; done
@@ -37,10 +81,14 @@ fn output() -> String {
         Ok(s) => s,
         Err(_) => String::from(":( BATT")
     };
-    // TODO volume
-    // TODO battery
+    let vol = match volume() {
+        Ok(s) => s,
+        Err(_) => String::from(":( VOL")
+    };
     // TODO wifi
-    return format!("{}", batt);
+    // TODO time
+    // TODO date
+    return format!("{} {}", vol, batt);
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
