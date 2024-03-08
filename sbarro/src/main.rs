@@ -74,7 +74,11 @@ fn volume() -> Result<String, Box<dyn Error>> {
     Ok(format!("VOL {}{}", level.trim(), muted))
 }
 
-// status_command while date +'%Y-%m-%d %H:%M '; do sleep 5; done
+fn datetime() -> Result<String, Box<dyn Error>> {
+    let date = Command::new("date").arg("+%Y-%m-%d %H:%M").output()?;
+    let s = String::from_utf8(date.stdout)?;
+    Ok(String::from(s.trim()))
+}
 
 fn output() -> String {
     let batt = match power() {
@@ -85,10 +89,13 @@ fn output() -> String {
         Ok(s) => s,
         Err(_) => String::from(":( VOL")
     };
+    let dt = match datetime() {
+        Ok(s) => s,
+        Err(_) => String::from(":( DATE")
+    };
     // TODO wifi
     // TODO time
-    // TODO date
-    return format!("{} {}", vol, batt);
+    return format!("{} {} {} ", vol, batt, dt);
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
