@@ -74,6 +74,20 @@ fn volume() -> Result<String, Box<dyn Error>> {
     Ok(format!("VOL {}{}", level.trim(), muted))
 }
 
+fn wifi() -> Result<String, Box<dyn Error>> {
+    let nmcli = Command::new("nmcli").arg("device").arg("show").arg("wlp1s0").output()?;
+    let mut state = String::from("");
+    for l in String::from_utf8(nmcli.stdout)?.lines() {
+        // TODO replac (connected) with a checkmark or something
+        if l.contains("GENERAL.STATE") {
+            state = String::from(
+                String::from(l.split(":").last().unwrap()).trim());
+            break;
+        }
+    }
+    Ok(String::from(format!("WIFI {}", state)))
+}
+
 fn datetime() -> Result<String, Box<dyn Error>> {
     let date = Command::new("date").arg("+%Y-%m-%d %H:%M").output()?;
     let s = String::from_utf8(date.stdout)?;
@@ -81,21 +95,23 @@ fn datetime() -> Result<String, Box<dyn Error>> {
 }
 
 fn output() -> String {
-    let batt = match power() {
-        Ok(s) => s,
-        Err(_) => String::from(":( BATT")
-    };
     let vol = match volume() {
         Ok(s) => s,
-        Err(_) => String::from(":( VOL")
+        Err(_) => String::from("D: VOL")
+    };
+    let batt = match power() {
+        Ok(s) => s,
+        Err(_) => String::from("D: BATT")
+    };
+    let wf = match wifi() {
+        Ok(s) => s,
+        Err(_) => String::from("D: WIFI")
     };
     let dt = match datetime() {
         Ok(s) => s,
-        Err(_) => String::from(":( DATE")
+        Err(_) => String::from("D: DATE")
     };
-    // TODO wifi
-    // TODO time
-    return format!("{} {} {} ", vol, batt, dt);
+    return format!("[{}] [{}] [{}] {} ", vol, batt, wf, dt);
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
