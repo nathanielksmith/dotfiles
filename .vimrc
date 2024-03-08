@@ -161,7 +161,7 @@ iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
 iab dbg fmt.Printf("DBG %#v\n",
 iab rerf return fmt.Errorf("
-iab ae assert.Equal
+"iab ae assert.Equal
 iab tss tests := []struct {<CR>name string<CR>}{}<CR><CR>for _, tt := range tests {<CR>t.Run(tt.name, func(t *testing.T) {<CR>})<CR>}
 
 nnoremap <leader>d "_d
