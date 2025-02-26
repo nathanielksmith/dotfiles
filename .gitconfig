@@ -1,0 +1,56 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[user]
+	email = nateksmith@pm.me
+	name = nate smith
+[safe]
+	directory = /home/vilmibm/mnt/vilmibm/THINKPAD_BKP/src/arkestrator
+	directory = /home/vilmibm/mnt/vilmibm/THINKPAD_BKP/src/cyberpunk-corpus
+	directory = /home/vilmibm/mnt/vilmibm/THINKPAD_BKP/src/dreamtv
+	directory = /home/vilmibm/mnt/vilmibm/THINKPAD_BKP/src/tildemush
+	directory = /home/vilmibm/mnt/vilmibm/src/hermeticum
+	directory = /home/vilmibm/mnt/debian_thinkpad_home/vilmibm/src/trunkless
+[init]
+	defaultBranch = trunk
+
+# from https://blog.gitbutler.com/how-git-core-devs-configure-git/
+
+[column]
+        ui = auto
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+[help]
+        autocorrect = prompt
+[commit]
+        verbose = true
+[rerere]
+        enabled = true
+        autoupdate = true
+[core]
+        excludesfile = ~/.gitignore
+[rebase]
+        autoSquash = true
+        autoStash = true
+        updateRefs = true
+
