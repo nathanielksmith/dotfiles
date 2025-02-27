@@ -22,6 +22,8 @@ call plug#begin('~/.vim/plug')
 let g:plug_timeout = 300
 
 set rtp+=~/src/fzf
+let &rtp .= ',' . expand( '<sfile>:p:h' )
+
 Plug '~/src/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'flazz/vim-colorschemes'
@@ -30,8 +32,14 @@ Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fugitive'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'arcticicestudio/nord-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --go-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --all' }
+Plug 'rose-pine/vim'
 Plug 'godlygeek/tabular'
+Plug 'shaoran/vim-ruff'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " this thing made lists go wacky:
 "Plug 'preservim/vim-markdown'
 "Plug '~/src/vim-hy'
@@ -56,16 +64,15 @@ set backspace=indent,eol,start
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildemush/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/tildetown/* setlocal ts=4 sw=4
 autocmd BufRead,BufNewFile /home/vilmibm/src/github/* setlocal ts=2 sw=2
-autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us
-autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us
-set gfn=Fantasque\ Sans\ Mono\ 12
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_us spellcapcheck=
+autocmd BufRead,BufNewFile *.txt setlocal spell spelllang=en_us spellcapcheck=
+
 
 set shiftround
 set autoindent
 set expandtab
 set wildmode=longest,list
 set number
-"set relativenumber
 set incsearch
 "set list listchars=tab:>-,trail:.,extends:>
 
@@ -90,24 +97,9 @@ augroup END
 
 " STATUSLINE
 
-" These are unused since what I was doing was too slow for github/github. If I
-" want to go without Fugitive though I can switch back.
-function! GitBranch()
-  " This is too slow in github/github.
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--path-to-ignore ~/.ignore --hidden', <bang>0)
-
 set laststatus=2 " always show statusline
 set statusline=
 set statusline+=%#PmenuSel#
-"set statusline+=%{StatuslineGit()}
 set statusline+=%{fugitive#statusline()}
 set statusline+=%#LineNr#
 set statusline+=\ %f
@@ -140,6 +132,8 @@ nmap <Leader>w <C-w>
 nmap <Leader>wm <C-w>o
 nmap <Leader>. :source%<Return>
 nmap <Leader>ed :e~/.vimrc<Return>
+nmap <Leader>tn :tabn<Return>
+nmap <Leader>tp :tabp<Return>
 
 imap <C-w>n <ESC>:tabn<Return>
 imap <C-w>p :tabp<cr>
@@ -150,32 +144,29 @@ vnoremap <Leader>sg y:spellgood <C-R>"<ENTER>
 " Go stuff
 nmap <Leader>gr :!go run %<Return>
 nmap <Leader>gt :GoTest<Return>
-nmap <Leader>gd :GoDef<Return>
 nmap <Leader>gi :GoImports<Return>
 nmap <Leader>gb :wa<Return>:GoBuild<Return>
 nmap <Leader>gR :wa<Return>:GoBuild<Return>:GoRename<Return>
+nmap <C-g> :GoDecls<cr>
+imap <C-g> <esc>:<C-u>GoDecls<cr>
 
+" Autocomplete
 nmap <Leader>gg :YcmCompleter GoToDefinition<Return>
 
 iab ife if err != nil {<CR>return err<CR>}
 iab ifne if err != nil {<CR>return nil, err<CR>}
 iab dbg fmt.Printf("DBG %#v\n",
 iab rerf return fmt.Errorf("
-"iab ae assert.Equal
 iab tss tests := []struct {<CR>name string<CR>}{}<CR><CR>for _, tt := range tests {<CR>t.Run(tt.name, func(t *testing.T) {<CR>})<CR>}
 
 nnoremap <leader>d "_d
 xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
-
-nmap <C-g> :GoDecls<cr>
-imap <C-g> <esc>:<C-u>GoDecls<cr>
+xnoremap <leader>Y :w !wl-copy<cr>
 
 " this works but not when editing markdown :(
 imap <C-i> <esc>>>$i
 imap <C-u> <esc><<$i
-
-" wheee
 
 " Mouse support
 set balloonevalterm
@@ -201,13 +192,14 @@ let &t_BD = "\e[?2004l"
 let &t_PS = "\e[200~"
 let &t_PE = "\e[201~"
 " Cursor control
-let &t_RC = "\e[?12$p"
-let &t_SH = "\e[%d q"
-let &t_RS = "\eP$q q\e\\"
-let &t_SI = "\e[5 q"
-let &t_SR = "\e[3 q"
-let &t_EI = "\e[1 q"
-let &t_VS = "\e[?12l"
+" solid block in normal, solid i beam in insert
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+"let &t_RC = "\e[?12$p"
+"let &t_SH = "\e[%d q"
+"let &t_RS = "\eP$q q\e\\"
+"let &t_SR = "\e[3 q"
+"let &t_VS = "\e[?12l"
 " Focus tracking
 let &t_fe = "\e[?1004h"
 let &t_fd = "\e[?1004l"
@@ -224,9 +216,89 @@ let &t_RT = "\e[23;2t"
 let &t_ut=''
 
 set t_Co=256
-set background=dark
 
-"colorscheme minimal 
+"set background=light
+set background=dark
+colorscheme eva01
+
+"colorscheme minimal
 "colorscheme monochrome
 "colorscheme true-monochrome
-colorscheme arcadia
+"colorscheme arcadia
+"neverness, nefertiti so close
+"colorscheme mourning good but too dark
+"colorscheme Atelier_LakesideDark
+"colorscheme rosepine
+
+" experimenting with vim-lsp
+if executable('pylsp')
+    " pip install python-lsp-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pylsp',
+        \ 'cmd': {server_info->['pylsp']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+" had to disable bc hates django
+"if executable('pylyzer')
+"    " pip install pylyzer
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pylyzer',
+"        \ 'cmd': {server_info->['pylyzer', '--server']},
+"        \ 'allowlist': ['python'],
+"        \ })
+"endif
+
+if executable('ruff')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info->['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \ 'workspace_config': {},
+        \ })
+endif
+
+if executable('gopls')
+  au User lsp_setup call lsp#register_server({
+    \   'name': 'gopls',
+    \   'cmd': {server_info->['gopls']},
+    \   'allowlist': ['go'],
+    \   'root_uri': {server_info->s:root_uri(['go.mod', '.git/'])},
+    \   'initialization_options': {
+    \     'diagnostics': v:true,
+    \     'completeUnimported': v:true,
+    \     'matcher': 'fuzzy'
+    \   }
+    \ })
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gl <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    "nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+    "nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
