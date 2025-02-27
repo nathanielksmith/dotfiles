@@ -54,3 +54,5 @@
         autoStash = true
         updateRefs = true
 
+[merge]
+	conflictstyle = zdiff3

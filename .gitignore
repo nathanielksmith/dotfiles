@@ -2,3 +2,13 @@ oh-my-zsh
 .vim/.netrwhist
 .vim/doc/tags
 *.pyc
+dist
+.venv/
+*.egg-info
+*.o
+*.a
+*~
+*.swp
+[Tt]humbs.db
+*.DS_Store
+*.log
